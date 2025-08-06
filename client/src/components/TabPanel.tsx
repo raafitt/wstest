@@ -1,22 +1,15 @@
-import { Tabs, Tab} from "./ui/tabs";
+import { useNavigate } from "react-router-dom";
 
-interface TabPanelProps {
-  currentParam: string;
-  setParam: (p: 'param1' | 'param2') => void;
-  paramNames: string[];
-}
-const tabList: Tab[] = [
-    { label: "Param 1", value: "param1" },
-    { label: "Param 2", value: "param2" },
-  ];
-export const TabPanel = ({ currentParam, setParam, paramNames }: TabPanelProps) => (
+
+
+export const TabPanel = () => {
+const navigate = useNavigate();
+
+  return(
   <div className="p-4">
-      <Tabs tabs={tabList} selected={currentParam} onChange={setParam} />
-
-      <div className="mt-4">
-        {currentParam === "param1" && <div>Контент для Param 1</div>}
-        {currentParam === "param2" && <div>Контент для Param 2</div>}
-      </div>
-    </div>
-  );
+    <button onClick={()=> navigate("/param1")}>Param 1</button>
+    <button onClick={()=> navigate("/param2")}>Param 2</button>
+  </div>
+  )
+}
 

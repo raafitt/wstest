@@ -32,7 +32,7 @@ export const ParamControls = observer(({ param,store }: Props) => {
       </label>
 
       <div className="space-x-2">
-        <button onClick={() => { store.reset(); store.updateConfig({ running: true }); console.log({ type: "start", config: store.config }); sendMessage({ type: "start", param: param, ...store.config }); }}>
+        <button onClick={() => { store.reset(); store.updateConfig({ running: true }); sendMessage({ type: "start", param: param, ...store.config }); }}>
           {running ? "Restart" : "Start"}
         </button>
         <button onClick={() => { store.updateConfig({ running: false }); sendMessage({ type: "stop", param: param, ...store.config }); }}>

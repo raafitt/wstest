@@ -1,7 +1,9 @@
 // services/ws.ts
-let socket: WebSocket;
+let socket: WebSocket | null = null;
 
 export function initWebSocket(onMessage: (msg: MessageEvent) => void) {
+  if (socket) return; // уже создан
+
   socket = new WebSocket("ws://localhost:8080");
 
   socket.onopen = () => {
@@ -16,18 +18,12 @@ export function initWebSocket(onMessage: (msg: MessageEvent) => void) {
 
   socket.onclose = () => {
     console.log("WebSocket connection closed.");
+    socket = null;
   };
-}
-
-export function closeWebSocket(){
-  if(socket?.readyState===WebSocket.OPEN || socket?.readyState===WebSocket.OPEN){
-    socket.close()
-  }
 }
 
 export function sendMessage(msg: any) {
   if (socket?.readyState === WebSocket.OPEN) {
-    console.log(JSON.stringify(msg))
     socket.send(JSON.stringify(msg));
   }
 }
