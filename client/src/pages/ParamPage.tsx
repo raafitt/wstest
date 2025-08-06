@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { ParamStore } from "../store/ParamStore";
-import { initWebSocket } from "../service/ws";
+import { closeWebSocket, initWebSocket } from "../service/ws";
 import { ParamControls } from "../components/ParamControls";
 import { ParamTable } from "../components/ParamTable";
 import { ParamChart } from "../components/ParamChart";
@@ -13,8 +13,9 @@ interface Props {
 }
 
 export const ParamPage = observer(({ param, store }: Props) => {
+  
   useEffect(() => {
-    initWebSocket((msg) => {
+    const socket=initWebSocket((msg) => {
       const { type, value, timestamp } = JSON.parse(msg.data);
       console.log(msg.data)
       if (type === "data") {
@@ -22,6 +23,9 @@ export const ParamPage = observer(({ param, store }: Props) => {
         store.updateValue(value);
       }
     });
+    return ()=>{
+      closeWebSocket()
+    }
   }, [param]);
 
 

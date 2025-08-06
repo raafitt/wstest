@@ -50,7 +50,7 @@ export function startWebSocketServer(port: number) {
     });
   });
 
-  console.log(`✅ WebSocket server running at ws://localhost:${port}`);
+  console.log(`WebSocket server running at ws://localhost:${port}`);
 }
 
 function broadcast(message: any) {

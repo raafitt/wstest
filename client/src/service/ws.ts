@@ -19,6 +19,12 @@ export function initWebSocket(onMessage: (msg: MessageEvent) => void) {
   };
 }
 
+export function closeWebSocket(){
+  if(socket?.readyState===WebSocket.OPEN || socket?.readyState===WebSocket.OPEN){
+    socket.close()
+  }
+}
+
 export function sendMessage(msg: any) {
   if (socket?.readyState === WebSocket.OPEN) {
     console.log(JSON.stringify(msg))
