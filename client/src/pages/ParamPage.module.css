@@ -1,0 +1,57 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+
+}
+
+.tableWrapper {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid;
+  border-radius: 8px;
+}
+
+.controlsWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.currentValueBox {
+  background-color: white;
+  padding: 16px;
+
+}
+
+.currentValueBox h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.currentValueBox p {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.chartWrapper {
+  flex: 1;
+  width: 100%;
+  min-height: 300px;
+  border: 1px solid;
+  border-radius: 8px;
+}
