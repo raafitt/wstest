@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { startWebSocketServer } from './websocket/wsServer';
 
 function getWsPort (){
-    dotenv.config();
+    dotenv.config({path:'../.env'});
     const portStr = process.env.WS_SERVER_PORT;
     if (!portStr) throw new Error("Не удалось установить порт сервиса из .env");
 

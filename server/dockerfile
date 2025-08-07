@@ -6,5 +6,5 @@ COPY package-lock.json ./
 RUN npm ci && npm i typescript -g
 COPY ./ ./
 RUN npm run build
-EXPOSE 8080
+#EXPOSE 8080
 CMD [ "node", "build/index.js" ]
