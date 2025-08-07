@@ -1,7 +1,5 @@
-// websocket/wsServer.ts
 import WebSocket, { WebSocketServer } from 'ws';
 import {
-  ParamKey,
   startGenerator,
   stopGenerator,
   updateConfig,
@@ -13,17 +11,16 @@ export function startWebSocketServer(port: number) {
   const wss = new WebSocketServer({ port });
 
   wss.on('connection', (ws) => {
-    clients.add(ws);//Добавили клиента в множество
-    ws.send(JSON.stringify({ type: 'info', message: 'Connected to WebSocket server' }));//Отправили данные клиенту
+    clients.add(ws);
+    ws.send(JSON.stringify({ type: 'info', message: 'Connected to WebSocket server' }));
 
-    //получение данных с клиента
     ws.on('message', (data) => {
       try {
         const msg = JSON.parse(data.toString());
         const { type, param, min, max, frequency } = msg;
 
-        if (!['param1', 'param2'].includes(param)) return;
-        const p = param as ParamKey;
+        // Не проверяем param, принимаем любой string
+        const p = String(param);
 
         if (type === 'start') {
           updateConfig(p, Number(min), Number(max), Number(frequency));

@@ -1,11 +1,51 @@
-// store/storeManager.ts
+import { makeAutoObservable } from "mobx";
 import { ParamStore } from "./ParamStore";
 
-const storeMap = new Map<string, ParamStore>();
+export class StoreManager {
+    stores: Map<string, ParamStore> = new Map();
+    counter = 1;
+    activeParam: string | null = null;
+    constructor() {
+        makeAutoObservable(this);
+        // Инициализируем с двумя параметрами
+        this.addStore("param1");
+        this.addStore("param2");
+    }
 
-export function getStoreForParam(param: string): ParamStore {
-  if (!storeMap.has(param)) {
-    storeMap.set(param, new ParamStore(param));
-  }
-  return storeMap.get(param)!;
+    get allStores() {
+        return Array.from(this.stores.values());
+    }
+
+    getStore(param: string): ParamStore | undefined {
+        return this.stores.get(param);
+    }
+
+    addStore(param?: string) {
+        console.log("+++");
+        
+        const newCounter = this.counter++;
+        const name = param || `param${newCounter}`;
+        console.log("name", name);
+        if (!this.stores.has(name)) {
+            console.log("this.store", this.stores);
+            const store = new ParamStore(name);
+            this.stores.set(name, store);
+        }
+    }
+
+    removeStore(param: string) {
+        this.stores.delete(param);
+    }
+
+    updateParamData(data: { param: string; value: number; timestamp: string }) {
+        const store = this.getStore(data.param);
+        if (store) {
+            store.updateValue(data);
+        }
+    }
+    setActiveParam(param: string | null) {
+        this.activeParam = param;
+    }
 }
+
+export const storeManager = new StoreManager();

@@ -1,6 +1,3 @@
-// logic/generatorManager.ts
-export type ParamKey = 'param1' | 'param2';
-
 export interface GenConfig {
   min: number;
   max: number;
@@ -8,21 +5,29 @@ export interface GenConfig {
   running: boolean;
 }
 
-type Callback = (param: ParamKey, value: number, timestamp: string) => void;
+type Callback = (param: string, value: number, timestamp: string) => void;
 
-const config: Record<ParamKey, GenConfig> = {
-  param1: { min: 0, max: 100, frequency: 1000, running: false },
-  param2: { min: 0, max: 100, frequency: 1000, running: false },
-};
+// Хранилище конфигураций параметров — динамическое
+const config: Record<string, GenConfig> = {};
 
-const timers: Partial<Record<ParamKey, NodeJS.Timeout>> = {};
+// Таймеры по параметрам
+const timers: Record<string, NodeJS.Timeout> = {};
 
-export function getConfig(param: ParamKey): GenConfig {
+export function getConfig(param: string): GenConfig {
+  if (!config[param]) {
+    // Инициализация конфигурации по умолчанию для нового param
+    config[param] = { min: 0, max: 100, frequency: 1000, running: false };
+  }
   return config[param];
 }
 
-export function startGenerator(param: ParamKey, cb: Callback) {
-  stopGenerator(param); // на случай перезапуска
+export function startGenerator(param: string, cb: Callback) {
+  stopGenerator(param); // остановим, если уже есть генератор
+
+  // Создадим конфиг, если нет
+  if (!config[param]) {
+    config[param] = { min: 0, max: 100, frequency: 1000, running: false };
+  }
   config[param].running = true;
 
   timers[param] = setInterval(() => {
@@ -34,16 +39,29 @@ export function startGenerator(param: ParamKey, cb: Callback) {
   }, config[param].frequency);
 }
 
-export function stopGenerator(param: ParamKey) {
-  config[param].running = false;
+export function stopGenerator(param: string) {
+  if (config[param]) {
+    config[param].running = false;
+  }
   if (timers[param]) {
-    clearInterval(timers[param]!);
+    clearInterval(timers[param]);
     delete timers[param];
   }
 }
 
-export function updateConfig(param: ParamKey, min: number, max: number, frequency: number) {
-  config[param].min = min;
-  config[param].max = max;
-  config[param].frequency = frequency;
+export function updateConfig(param: string, min: number, max: number, frequency: number) {
+  if (!config[param]) {
+    config[param] = { min, max, frequency, running: false };
+  } else {
+    config[param].min = min;
+    config[param].max = max;
+    config[param].frequency = frequency;
+  }
+
+  // Если генератор запущен, нужно перезапустить его с новыми настройками
+  if (config[param].running) {
+    startGenerator(param, (p, value, timestamp) => {
+      // Обработчик генерации — тут его нужно будет передать снаружи (возможно прокидывать через callback)
+    });
+  }
 }

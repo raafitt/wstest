@@ -1,0 +1,10 @@
+FROM node:23-alpine3.19
+
+WORKDIR /app
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci && npm i typescript -g
+COPY ./ ./
+RUN npm run build
+EXPOSE 8080
+CMD [ "node", "build/index.js" ]

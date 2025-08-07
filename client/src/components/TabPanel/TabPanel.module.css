@@ -1,0 +1,36 @@
+.container {
+  padding: 2rem;
+
+}
+
+.tabButtonWrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 10px;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 5px ;
+}
+
+.tabLink {
+  text-decoration: none;
+}
+
+.tabButton {
+  padding: 4px 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.removeButton {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  color: red;
+}
+
+.active {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+}

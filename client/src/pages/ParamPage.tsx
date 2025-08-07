@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { ParamStore } from "../store/ParamStore";
-import { ParamControls } from "../components/ParamControls";
-import { ParamTable } from "../components/ParamTable";
-import { ParamChart } from "../components/ParamChart";
+import { ParamControls } from "../components/Control/ParamControls";
+import { ParamTable } from "../components/Table/ParamTable";
+import { ParamChart } from "../components/Chart/ParamChart";
 import styles from "./ParamPage.module.css";
-import { TabPanel } from "../components/TabPanel";
+import { TabPanel } from "../components/TabPanel/TabPanel";
 
 interface Props {
   param: string;
