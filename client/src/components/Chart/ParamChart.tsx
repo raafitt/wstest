@@ -13,8 +13,8 @@ export const ParamChart = observer(({ store }: Props) => {
   return (
     <div style={{ height: "500px" }}>
       <Plot
-        data={[{ x: timestamps, y: values, type: "scatter", mode: "lines+markers" }]}
-        layout={{margin: { t: 40, b: 40, l: 40, r: 20 } }}
+        data={[{ x: timestamps, y: values, type: "scatter", mode: "lines" }]}
+        layout={{margin: { t: 40, b: 40, l: 40, r: 40 } }}
         style={{ width: "100%", height: "100%" }}
       />
     </div>
