@@ -33,8 +33,16 @@ export class StoreManager {
         }
     }
 
-    removeStore(param: string) {
+    removeStore(param: string, navigate?: (path: string) => void) {
         this.stores.delete(param);
+
+        // если удаляем активный параметр
+        if (this.activeParam === param) {
+            this.setActiveParam(null);
+            if (navigate) {
+                navigate("/home");
+            }
+        }
     }
 
     updateParamData(data: { param: string; value: number; timestamp: string }) {

@@ -9,12 +9,12 @@ import { TabPanel } from "./components/TabPanel/TabPanel";
 
 
 
+
 const App = observer(() => {
 
   useEffect(() => {
     initWebSocket((msg) => {
       const data = JSON.parse(msg.data);
-      console.log(data)
       if (data.type === "data") {
         storeManager.updateParamData(data);
       }
@@ -24,17 +24,18 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-      
-      <Routes>
-        {storeManager.allStores.map(store => (
-          <Route
-            key={store.param}
-            path={`/${store.param}`}
-            element={<ParamPage store={store} param={store.param} />}
-          />
-        ))}
-      </Routes>
-    </BrowserRouter>
+  <Routes>
+    <Route path="/" element={<TabPanel />} />
+    {storeManager.allStores.map(store =>
+        <Route
+          key={store.param}
+          path={`/${store.param}`}
+          element={<ParamPage store={store} param={store.param} />}
+        />
+    )}
+    <Route path="/home" element={<TabPanel />} />
+  </Routes>
+</BrowserRouter>
   );
 });
 
