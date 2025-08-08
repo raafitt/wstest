@@ -19,7 +19,7 @@ export function startWebSocketServer(port: number) {
         const msg = JSON.parse(data.toString());
         const { type, param, min, max, frequency } = msg;
 
-        // Не проверяем param, принимаем любой string
+        
         const p = String(param);
 
         if (type === 'start') {

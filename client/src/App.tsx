@@ -16,6 +16,7 @@ const App = observer(() => {
     initWebSocket((msg) => {
       const data = JSON.parse(msg.data);
       if (data.type === "data") {
+        //console.log(data)
         storeManager.updateParamData(data);
       }
     });

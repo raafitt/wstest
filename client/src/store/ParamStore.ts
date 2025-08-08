@@ -18,8 +18,9 @@ export class ParamStore {
   updateValue(data: any) {
     if(data.param===this.param){
         this.currentValue = data.value;
-        const now = Date.now();
-        this.history.push({ timestamp:now, value: data.value });
+        let ts=new Date(data.timestamp).getTime()
+        this.history.push({ timestamp: ts, value: data.value });
+        //console.log(ts)
     }
 
     // удаление данных старше 10 минут

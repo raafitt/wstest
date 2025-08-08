@@ -1,0 +1,107 @@
+.container {
+  padding: 16px;
+  user-select: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+
+}
+
+/* Текущие значение: лейбл слева, значение справа в рамке */
+.currentValueRow {
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.currentValueLabel {
+  font-weight: 600;
+  font-size: 30px;
+  color: #444;
+}
+
+.currentValueBox {
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  padding: 4px 12px;
+  min-width: 100px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 25px;
+  background-color: #f9f9f9;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Min и Max в ряд */
+.rowInputs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  color: #555;
+}
+
+.input {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 4px;
+  font-size: 25px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* Frequency под Min */
+.frequencyWrapper {
+  margin-bottom: 20px;
+  max-width: 200px;
+}
+
+/* Кнопки в ряд с большим отступом */
+.buttonsRow {
+  display: flex;
+  gap: 40px;
+}
+
+.button {
+  flex: 1;
+  padding: 10px 0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  font-size: 30px;
+  user-select: none;
+}
+
+.startButton {
+  background-color: #4caf50;
+}
+
+.startButton:hover {
+  background-color: #43a047;
+}
+
+.restartButton {
+  background-color: #ff9800;
+}
+
+.restartButton:hover {
+  background-color: #fb8c00;
+}
+
+.stopButton {
+  background-color: #f44336;
+}
+
+.stopButton:hover {
+  background-color: #e53935;
+}

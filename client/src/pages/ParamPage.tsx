@@ -28,24 +28,24 @@ export const ParamPage = observer(() => {
   if (!store) return null; // пока редирект не сработал
 
   return (
-    <div className={styles.dashboard}>
-      <TabPanel />
-      <div className={styles.topSection}>
-        <div className={styles.controlsWrapper}>
-          <div className={styles.currentValueBox}>
-            <h2>Текущее значение {param}</h2>
-            <p>{store.currentValue.toFixed(2)}</p>
-          </div>
-          <ParamControls store={store} param={param!} />
-        </div>
-        <div className={styles.tableWrapper}>
-          <ParamTable store={store} />
-        </div>
+  <div className={styles.dashboard}>
+    <div className={styles.tabBar}>
+        <TabPanel />
+    </div>
+
+    <div className={styles.topSection}>
+      <div className={styles.controlsWrapper}>
+        <ParamControls store={store} param={param!} />
       </div>
-      <div className={styles.chartWrapper}>
-        <ParamChart store={store} />
+      <div className={styles.tableWrapper}>
+        <ParamTable store={store} />
       </div>
     </div>
-  );
+    <div className={styles.chartWrapper}>
+      <ParamChart store={store} />
+    </div>
+  </div>
+);
+
 
 });

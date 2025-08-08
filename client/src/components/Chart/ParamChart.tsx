@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ParamChart = observer(({ store }: Props) => {
-  const timestamps = store.history.map((p) => new Date(Number(p.timestamp)).toLocaleTimeString());
+  const timestamps = store.history.map((p) => new Date(Number(p.timestamp)));
   const values = store.history.map((p) => p.value);
 
   return (

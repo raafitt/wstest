@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { AgGridReact } from "ag-grid-react";
 import { ParamStore } from "../../store/ParamStore";
-import { useMemo } from "react";
-import { ModuleRegistry, AllCommunityModule, GridReadyEvent } from 'ag-grid-community';
+import { useEffect, useMemo, useRef } from "react";
+import { ModuleRegistry, AllCommunityModule, GridApi, ColDef, themeQuartz } from 'ag-grid-community';
 
 
 import "ag-grid-community/styles/ag-grid.css";
@@ -18,47 +18,60 @@ interface RowData {
 }
 ModuleRegistry.registerModules([AllCommunityModule]);
 export const ParamTable = observer(({ store }: Props) => {
-  const columnDefs = useMemo<import("ag-grid-community").ColDef<RowData>[]>(() => [
-    {
-      headerName: "Time",
-      field: "time",
-      sortable: true,
-      filter: true,
+  const gridApiRef = useRef<GridApi<RowData> | null>(null);
 
-    },
-    {
-      headerName: "Value",
-      field: "value",
-      sortable: true,
-      filter: true,
-
-    },
+  const columnDefs = useMemo<ColDef<RowData>[]>(() => [
+    { headerName: "Time", field: "time", sortable: true, filter: true },
+    { headerName: "Value", field: "value", sortable: true, filter: true }
   ], []);
 
-  let gridApi = null;
-  const onGridReady = (params: GridReadyEvent) => {
-    gridApi = params.api;
-  }
+  // Инициализация только один раз
+  const initialData = useMemo<RowData[]>(() =>
+    store.history.map(dp => ({
+      time: new Date(dp.timestamp).toLocaleTimeString(),
+      value: dp.value.toFixed(2),
+    }))
+    , [store]);
 
-  const rowData = useMemo<RowData[]>(
-    () =>
-      [...store.history].reverse().map((dp) => ({
-        time: new Date(Number(dp.timestamp)).toLocaleTimeString(),
-        value: dp.value.toFixed(2),
-      })), [store.history]
-      
-      // const lastElem = store.history[store.history.length - 1]
-      // gridApi!.applyTransaction({ add: lastElem });
-      
-  );
+  // При добавлении новых данных — обновляем таблицу без перерендера
+  useEffect(() => {
+    if (gridApiRef.current && store.history.length > 0) {
+      const lastPoint = store.history[store.history.length - 1];
+      const rowCount = gridApiRef.current.getDisplayedRowCount()
+      gridApiRef.current.applyTransaction({
+        add: [{
+          time: new Date(lastPoint.timestamp).toLocaleTimeString(),
+          value: lastPoint.value.toFixed(2),
+        }],
+        addIndex: rowCount
+      });
+      gridApiRef.current.ensureIndexVisible(rowCount, "bottom");
+    }
+  }, [store.history.length]); // следим только за изменением длины
 
+  const myTheme = themeQuartz.withParams({
+    fontSize: 35,
+    headerFontSize: 10,
+  });
+
+  const theme = useMemo(() => { return myTheme; }, []);
+  const containerStyle = useMemo(() => ({ width: "100%", height: "100%" }), []);
+  const gridStyle = useMemo(() => ({ height: "100%", width: "100%" }), []);
   return (
-    <div className="ag-theme-alpine" style={{ height: 200, width: "100%" }}>
-      <AgGridReact<RowData>
-        columnDefs={columnDefs}
-        rowData={rowData}
-        onGridReady={onGridReady}
-      />
+    <div style={containerStyle}>
+      <div style={gridStyle}>
+        <AgGridReact<RowData>
+          columnDefs={columnDefs}
+          rowData={initialData}
+          theme={theme}
+          loadThemeGoogleFonts={true}
+          defaultColDef={{ flex: 1, minWidth: 100, resizable: true }}
+          onGridReady={params => {
+            gridApiRef.current = params.api;
+          }}
+        />
+      </div>
     </div>
   );
 });
+

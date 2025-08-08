@@ -2,56 +2,113 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 16px;
-  gap: 16px;
+  padding: 24px;
+  gap: 24px;
   box-sizing: border-box;
+  background: #f7f9fc;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
 .topSection {
   display: flex;
   flex-direction: row;
-  gap: 16px;
-
+  min-height: 400px;
+  gap: 24px;
+  flex-wrap: wrap; /* Чтобы на узких экранах элементы переходили вниз */
 }
 
 .tableWrapper {
-  flex: 1;
-  min-width: 0;
-  border: 1px solid;
-  border-radius: 8px;
+  flex: 1 1 600px; /* минимальная ширина 600px, растягивается */
+  min-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+  padding: 16px;
+  overflow: hidden;
+ 
 }
 
 .controlsWrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 10px;
+  flex: 1 1 600px;
+  gap: 24px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+ 
 }
 
 .currentValueBox {
-  background-color: white;
-  padding: 16px;
-
+  background-color: #f0f4f8;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: inset 0 0 8px rgb(0 0 0 / 0.03);
+  user-select: none;
 }
 
 .currentValueBox h2 {
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #0078d4;
 }
 
 .currentValueBox p {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 36px;
+  font-weight: 700;
   margin: 0;
+  color: #222;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.tabBar {
+  flex:20%;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.07);
+  padding: 2px;
 }
 
 .chartWrapper {
-  flex: 1;
-  width: 100%;
-  min-height: 300px;
-  border: 1px solid;
+  flex: 1 1 100%;
+  min-height: 360px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.07);
+  padding: 16px;
+}
+
+/* Пример плавного эффекта для кнопок в ParamControls (если там есть кнопки) */
+button {
+  background-color: #0078d4;
+  color: white;
+  border: none;
   border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+button:hover {
+  background-color: #005a9e;
+}
+
+/* Адаптив для очень узких экранов */
+@media (max-width: 720px) {
+  .topSection {
+    flex-direction: column;
+  }
+  
+  .tableWrapper,
+  .controlsWrapper {
+    flex: 1 1 100%;
+    min-width: auto;
+  }
 }

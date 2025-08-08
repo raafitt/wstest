@@ -61,7 +61,7 @@ export function updateConfig(param: string, min: number, max: number, frequency:
   // Если генератор запущен, нужно перезапустить его с новыми настройками
   if (config[param].running) {
     startGenerator(param, (p, value, timestamp) => {
-      // Обработчик генерации — тут его нужно будет передать снаружи (возможно прокидывать через callback)
+    
     });
   }
 }
