@@ -1,3 +1,6 @@
 dockerfile
 node_modules
+.env
+build
 .dockerignore
+docker-compose.yml
