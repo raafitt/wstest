@@ -24,18 +24,12 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-  <Routes>
-    <Route path="/" element={<TabPanel />} />
-    {storeManager.allStores.map(store =>
-        <Route
-          key={store.param}
-          path={`/${store.param}`}
-          element={<ParamPage store={store} param={store.param} />}
-        />
-    )}
-    <Route path="/home" element={<TabPanel />} />
-  </Routes>
-</BrowserRouter>
+      <Routes>
+        <Route path="/" element={<TabPanel />} />
+        <Route path="/:param" element={<ParamPage />} />
+        <Route path="/home" element={<TabPanel />} />
+      </Routes>
+    </BrowserRouter>
   );
 });
 

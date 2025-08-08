@@ -3,10 +3,10 @@ import styles from "./TabPanel.module.css";
 import { sendMessage } from "../../service/ws";
 import { Link } from "react-router-dom";
 import { storeManager } from "../../store/storeManager";
-import { useNavigate } from "react-router-dom";
+
 
 export const TabPanel = observer(() => {
-  const navigate = useNavigate();
+
 
   return (
     <div className={styles.container}>
@@ -29,7 +29,7 @@ export const TabPanel = observer(() => {
             <span
               className={styles.removeButton}
               onClick={() => {
-                storeManager.removeStore(store.param, navigate);
+                storeManager.removeStore(store.param);
                 sendMessage({ type: "stop", param: store.param });
                 console.log(storeManager.allStores)
                 // сбросываем активную вкладку если удаляем ее  

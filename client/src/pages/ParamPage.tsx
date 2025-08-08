@@ -1,18 +1,31 @@
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { ParamStore } from "../store/ParamStore";
 import { ParamControls } from "../components/Control/ParamControls";
 import { ParamTable } from "../components/Table/ParamTable";
 import { ParamChart } from "../components/Chart/ParamChart";
 import styles from "./ParamPage.module.css";
 import { TabPanel } from "../components/TabPanel/TabPanel";
+import { useNavigate, useParams } from "react-router-dom";
+import { storeManager } from "../store/storeManager";
 
-interface Props {
-  param: string;
-  store: ParamStore;
-}
 
-export const ParamPage = observer(({ param, store }: Props) => {
+
+export const ParamPage = observer(() => {
+
+  const { param } = useParams<{ param: string }>();
+  const navigate = useNavigate();
+
+  const store = param ? storeManager.getStore(param) : undefined;
+
+  useEffect(() => {
+    if (!store) {
+      navigate("/home", { replace: true });
+    } else {
+      storeManager.setActiveParam(param!);
+    }
+  }, [store, param, navigate]);
+
+  if (!store) return null; // пока редирект не сработал
 
   return (
     <div className={styles.dashboard}>
@@ -23,9 +36,7 @@ export const ParamPage = observer(({ param, store }: Props) => {
             <h2>Текущее значение {param}</h2>
             <p>{store.currentValue.toFixed(2)}</p>
           </div>
-          <ParamControls
-            store={store}
-            param={param} />
+          <ParamControls store={store} param={param!} />
         </div>
         <div className={styles.tableWrapper}>
           <ParamTable store={store} />
