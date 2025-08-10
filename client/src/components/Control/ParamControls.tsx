@@ -15,7 +15,9 @@ export const ParamControls = observer(({ param, store }: Props) => {
   };
 
   const sendStart = () => {
-    store.reset();
+    if(store.config.running){
+      store.reset();
+    }
     store.updateConfig({ running: true });
     sendMessage({ type: "start", param, ...store.config });
   };
