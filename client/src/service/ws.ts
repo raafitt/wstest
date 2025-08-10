@@ -11,9 +11,10 @@ export function initWebSocket(onMessage: (msg: MessageEvent) => void) {
     console.log("WebSocket connection opened.");
   };
 
+  //При получении сообщения с сервера вызывается переданный в initWebSocket callback
   socket.onmessage = onMessage;
 
-  //Калбек При ошибке 
+  //callback При ошибке 
   socket.onerror = (err) => {
     console.error("WebSocket error:", err);
   };

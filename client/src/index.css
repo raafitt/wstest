@@ -12,27 +12,38 @@ code {
     monospace;
 }
 
-/* Увеличиваем высоту заголовка столбцов и делаем текст крупнее */
+
 .ag-header-cell-label {
-  font-size: 16px !important;
+  font-size: 25px !important;
+  height: 30px;
   font-weight: 700;
   color: #222;
 }
 
-/* Сделать ширину таблицы 100% и колонки растягиваются */
+
 .ag-root-wrapper {
   width: 100% !important;
 }
 
-/* Если хочешь, чтобы колонки растягивались, можно добавить автоширину */
+
 .ag-center-cols-container {
   width: 100% !important;
 }
 
-/* Установим минимальную высоту для всей таблицы */
 .ag-theme-alpine {
   height: 350px !important;
   width: 100% !important;
   box-sizing: border-box;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 50px; 
+  line-height: 50px; 
+}
+
+.ag-theme-alpine .ag-header-row {
+  height: 50px !important; 
 }
 

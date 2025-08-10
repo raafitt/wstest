@@ -21,13 +21,9 @@ export class StoreManager {
     }
 
     addStore(param?: string) {
-        console.log("+++");
-        
         const newCounter = this.counter++;
         const name = param || `param${newCounter}`;
-        console.log("name", name);
         if (!this.stores.has(name)) {
-            console.log("this.store", this.stores);
             const store = new ParamStore(name);
             this.stores.set(name, store);
         }
@@ -35,7 +31,7 @@ export class StoreManager {
 
     removeStore(param: string) {
         this.stores.delete(param);
-        // если удаляем активный параметр
+        // при удалении активного параметра
         if (this.activeParam === param) {
             this.setActiveParam(null);
         }

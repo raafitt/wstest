@@ -1,66 +1,10 @@
-/* Переопределение стилей контейнера */
-.ag-theme-alpine {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
-  background-color: #fff;
-  overflow: hidden;
+.ag-theme-alpine .ag-header-cell {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 50px; /* высота ячеек заголовка */
+  line-height: 50px; /* выравнивание текста по центру */
 }
 
-/* Заголовки колонок */
-.ag-header-cell {
-  background-color: #0078d4;
-  color: white;
-  font-weight: 600;
-  border-right: 1px solid #005a9e;
-}
-
-/* Последняя граница справа */
-.ag-header-cell:last-child {
-  border-right: none;
-}
-
-/* Ячейки */
-.ag-cell {
-  border-right: 1px solid #e1e1e1;
-  padding: 8px 12px;
-  color: #333;
-  background-color: #fafafa;
-  transition: background-color 0.3s;
-}
-
-/* Убрать рамку у последней колонки */
-.ag-cell:last-child {
-  border-right: none;
-}
-
-/* Выделение строки при наведении */
-.ag-row:hover {
-  background-color: #e6f0fb !important;
-  cursor: pointer;
-}
-
-/* Выделение активной строки */
-.ag-row-selected {
-  background-color: #d0e7ff !important;
-}
-
-/* Стили для фильтров и сортировки (если есть) */
-.ag-header-cell-label {
-  font-weight: 700;
-}
-
-/* Скроллбар */
-.ag-body-viewport::-webkit-scrollbar {
-  height: 8px;
-}
-
-.ag-body-viewport::-webkit-scrollbar-track {
-  background: #f0f0f0;
-}
-
-.ag-body-viewport::-webkit-scrollbar-thumb {
-  background-color: #a0a0a0;
-  border-radius: 4px;
+.ag-theme-alpine .ag-header-row {
+  height: 50px !important; /* сама строка заголовков */
 }

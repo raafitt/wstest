@@ -7,7 +7,7 @@ export interface GenConfig {
 
 type Callback = (param: string, value: number, timestamp: string) => void;
 
-// Хранилище конфигураций параметров — динамическое
+// Хранилище конфигураций параметров
 const config: Record<string, GenConfig> = {};
 
 // Таймеры по параметрам
@@ -24,7 +24,6 @@ export function getConfig(param: string): GenConfig {
 export function startGenerator(param: string, cb: Callback) {
   stopGenerator(param); // остановим, если уже есть генератор
 
-  // Создадим конфиг, если нет
   if (!config[param]) {
     config[param] = { min: 0, max: 100, frequency: 1000, running: false };
   }
@@ -58,7 +57,7 @@ export function updateConfig(param: string, min: number, max: number, frequency:
     config[param].frequency = frequency;
   }
 
-  // Если генератор запущен, нужно перезапустить его с новыми настройками
+
   if (config[param].running) {
     startGenerator(param, (p, value, timestamp) => {
     

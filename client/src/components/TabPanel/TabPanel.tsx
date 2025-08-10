@@ -9,10 +9,10 @@ export const TabPanel = observer(() => {
 
 
   return (
-    <div className={styles.container}>
+    <div >
       {storeManager.allStores.map(store => {
         const isActive = storeManager.activeParam === store.param;
-  
+
         return (
           <div
             key={store.param}

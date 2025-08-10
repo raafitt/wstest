@@ -1,9 +1,9 @@
 .dashboard {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  padding: 24px;
-  gap: 24px;
+
+  padding: 10px;
+  gap: 10px;
   box-sizing: border-box;
   background: #f7f9fc;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -13,14 +13,14 @@
 .topSection {
   display: flex;
   flex-direction: row;
-  min-height: 400px;
+  min-height: 200px;
   gap: 24px;
-  flex-wrap: wrap; /* Чтобы на узких экранах элементы переходили вниз */
+  flex-wrap: wrap; 
 }
 
 .tableWrapper {
-  flex: 1 1 600px; /* минимальная ширина 600px, растягивается */
-  min-width: 300px;
+  flex: 1 1 400px; 
+  min-width: 250px;
   border: 1px solid #ddd;
   border-radius: 12px;
   background-color: #fff;
@@ -31,11 +31,11 @@
 }
 
 .controlsWrapper {
-  flex: 1 1 600px;
-  gap: 24px;
+  flex: 1 1 400px;
+  gap: 10px;
   border: 1px solid #ddd;
   border-radius: 12px;
-  padding: 20px;
+  padding: 10px;
   background-color: #fff;
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
  
@@ -51,19 +51,13 @@
 }
 
 .currentValueBox h2 {
-  font-size: 20px;
+  font-size: 10px;
   font-weight: 600;
   margin-bottom: 10px;
   color: #0078d4;
 }
 
-.currentValueBox p {
-  font-size: 36px;
-  font-weight: 700;
-  margin: 0;
-  color: #222;
-  font-family: "Courier New", Courier, monospace;
-}
+
 
 .tabBar {
   flex:20%;
@@ -75,8 +69,8 @@
 }
 
 .chartWrapper {
-  flex: 1 1 100%;
-  min-height: 360px;
+  flex: 1 1 450%;
+  min-height: 350px;
   border: 1px solid #ddd;
   border-radius: 12px;
   background-color: #fff;
@@ -84,9 +78,9 @@
   padding: 16px;
 }
 
-/* Пример плавного эффекта для кнопок в ParamControls (если там есть кнопки) */
+
 button {
-  background-color: #0078d4;
+  background-color: #669ac2;
   color: white;
   border: none;
   border-radius: 8px;
@@ -98,17 +92,4 @@ button {
 
 button:hover {
   background-color: #005a9e;
-}
-
-/* Адаптив для очень узких экранов */
-@media (max-width: 720px) {
-  .topSection {
-    flex-direction: column;
-  }
-  
-  .tableWrapper,
-  .controlsWrapper {
-    flex: 1 1 100%;
-    min-width: auto;
-  }
 }
